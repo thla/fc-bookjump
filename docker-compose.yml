@@ -1,0 +1,38 @@
+web:
+    image: hitalos/laravel:latest
+    ports:
+        - 80:80
+    volumes:
+        - ./:/var/www
+    links:
+        - db
+    environment:
+        DB_HOST: db
+        DB_DATABASE: dbname
+        DB_USERNAME: username
+        DB_PASSWORD: RH5pWF3VGEpBaGv6
+        DB_CONNECTION: mysql
+        DB_ROOT_PASSWORD: V59FynPJ4QJ4mnnA
+        
+phpmyadmin:
+     image: phpmyadmin/phpmyadmin
+     environment:
+            PMA_ARBITRARY: 1
+            MYSQL_USER: username
+            MYSQL_PASSWORD: RH5pWF3VGEpBaGv6
+            MYSQL_ROOT_PASSWORD: V59FynPJ4QJ4mnnA
+     ports:
+            - 8080:80
+     links:
+            # for mysql container
+            - db        
+db:
+    image: mysql
+    ports:
+        - 3306:3306
+    environment:
+        # with mysql
+        MYSQL_DATABASE: dbname
+        MYSQL_USER: username
+        MYSQL_PASSWORD: RH5pWF3VGEpBaGv6
+        MYSQL_ROOT_PASSWORD: V59FynPJ4QJ4mnnA

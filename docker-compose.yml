@@ -13,7 +13,9 @@ web:
         DB_PASSWORD: RH5pWF3VGEpBaGv6
         DB_CONNECTION: mysql
         DB_ROOT_PASSWORD: V59FynPJ4QJ4mnnA
-        
+    # If you don't want to use default 'artisan serve' command, edit and uncomment the line below.
+    # command: php -S 0.0.0.0:80 -t public public/index.php
+
 phpmyadmin:
      image: phpmyadmin/phpmyadmin
      environment:

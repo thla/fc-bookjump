@@ -44,6 +44,11 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
+                                    <li>
+                                        <a class="btn btn-link" href="/change-password">
+                                            Change Password
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         @endif

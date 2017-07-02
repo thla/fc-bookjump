@@ -19,34 +19,29 @@ class UpdatePasswordController extends Controller
     }
 
     /**
-     * Update the password for the user.
+     * Location the password for the user.
      *
      * @param  Request  $request
      * @return Response
      */
-    public function update(Request $request)
+    public function location(Request $request)
     {
         $this->validate($request, [
-            'old' => 'required',
-            'password' => 'required|min:6|confirmed',
+            'city' => 'required',
+            'state' => 'required',
         ]);
 
         $user = User::find(Auth::id());
-        $hashedPassword = $user->password;
 
-        if (Hash::check($request->old, $hashedPassword)) {
-            //Change the password
-            $user->fill([
-                'password' => Hash::make($request->password)
-            ])->save();
+        $user->fill([
+            'city' => $request->city,
+            'state' => $request->state
+        ])->save();
 
-            $request->session()->flash('success', 'Your password has been changed.');
-
-            return back();
-        }
-
-        $request->session()->flash('failure', 'Your password has not been changed.');
+        $request->session()->flash('success1', 'Your location has been updated.');
 
         return back();
     }
+
+
 }

@@ -2,10 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Books;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
 {
+    /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
+     
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +37,8 @@ class BooksController extends Controller
      */
     public function create()
     {
-        //
+        // load the create form (app/views/nerds/create.blade.php)
+        return view('createbook');
     }
 
     /**

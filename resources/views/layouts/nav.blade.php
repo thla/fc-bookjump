@@ -22,6 +22,9 @@
    
                     <!-- Right Side Of Navbar -->
                     <div class="nav  navbar-right">
+                        <a class="nav-link" href="/books">All Books</a>
+                        <a class="nav-link" href="/books/create"">My Books</a>
+                    
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <a class="nav-link" href="{{ route('login') }}">Login</a>
@@ -36,18 +39,14 @@
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+                                                     document.getElementById('logout-form').submit();">Logout</a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
                                     <li>
-                                        <a class="btn btn-link" href="/change-password">
-                                            Change Password
-                                        </a>
+                                        <a href="/change-password">Change Settings</a>
                                     </li>
                                 </ul>
                             </li>

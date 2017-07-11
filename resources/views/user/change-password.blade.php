@@ -23,7 +23,7 @@
                             <label for="city" class="col-md-4 control-label">City</label>
 
                             <div class="col-md-6">
-                                <input id="city" type="city" class="form-control" name="city" value="{{ Auth::user()->name }}">
+                                <input id="city" type="city" class="form-control" name="city" value="{{ Auth::user()->city }}">
                             </div>
                         </div>
 

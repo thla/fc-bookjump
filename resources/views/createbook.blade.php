@@ -5,35 +5,96 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-default">
-        <div class="panel-heading">My Books</div>
+        <div class="panel-heading">Add new book to your collection</div>
 
         <div class="panel-body">
-          @if (Session::has('success'))
-          <div class="alert alert-success">{!! Session::get('success') !!}</div>
+          {{ HTML::ul($errors->all() )}}
+          @if (Session::has('message'))
+              <div class="alert alert-success">{!! Session::get('message') !!}</div>
           @endif
-          @if (Session::has('failure'))
-          <div class="alert alert-danger">{!! Session::get('failure') !!}</div>
-          @endif
-          <form action="change-password" method="post" role="form" class="form-horizontal">
-            {{csrf_field()}}
 
-            <div class="form-group{{ $errors->has('old') ? ' has-error' : '' }}">
-              <label for="book" class="col-md-4 control-label">Add book</label>
-
-              <div class="col-md-6">
-                <input id="book" type="input" class="form-control" name="newbook">
-
-                @if ($errors->has('newbook'))
-                <span class="help-block">
-                  <strong>{{ $errors->first('newbook') }}</strong>
+          {{ Form::open(array('url' => 'books')) }}
+<div class="col-lg-12">
+            <div class="form-group">
+              <div class="input-group">
+                {{ Form::text('book', Input::old('book'), array('class' => 'form-control', 'placeholder' => 'Add book...')) }}
+                <span class="input-group-btn">
+                  {{ Form::submit('Go!', array('class' => 'btn btn-primary')) }}
                 </span>
-                @endif
-              </div>
+              </div><!-- /input-group -->
             </div>
-          </form>
+          {{ Form::close() }}
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="row">
+       <h2 class="my-4 text-center text-lg-left">My Books</h2>
+
+        <div class="row text-center text-lg-left">
+
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                <a href="#" class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                <a href="#" class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                <a href="#" class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                <a href="#" class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                <a href="#" class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                <a href="#" class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                <a href="#" class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                <a href="#" class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                <a href="#" class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                <a href="#" class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                <a href="#" class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                <a href="#" class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+                </a>
+            </div>
+        </div>
   </div>
 </div>
 @endsection

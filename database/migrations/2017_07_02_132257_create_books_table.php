@@ -16,7 +16,8 @@ class CreateBooksTable extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->string('owner')->nullable();
+            $table->integer('owner')->unsigned();
+            $table->foreign('owner')->references('id')->on('users');
             $table->string('cover')->nullable();
             $table->boolean('requested')->default(false);
             $table->boolean('active')->default(false);

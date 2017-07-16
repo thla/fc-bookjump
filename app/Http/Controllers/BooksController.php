@@ -4,6 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Books;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+
+use Google_Client;
+use Google_Service_Books;
 
 class BooksController extends Controller
 {
@@ -49,7 +57,41 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+		// validate
+		// read more on validation at http://laravel.com/docs/validation
+		$rules = array(
+			'book'       => 'required',
+		);
+		$validator = Validator::make(Input::all(), $rules);
+
+		// process the login
+		if ($validator->fails()) {
+			return Redirect::to('createbook')
+				->withErrors($validator)
+				->withInput();
+		} else {
+            $client = new Google_Client();
+            $client->setApplicationName("bookjump");
+            $client->setDeveloperKey("AIzaSyCp6TeBmn43CwAoM-_E8judP6-LuUoiAuo");
+
+            $service = new Google_Service_Books($client);
+            $results = $service->volumes->listVolumes(Input::get('book'));
+
+            foreach ($results as $item) {
+                //echo $item['volumeInfo']['title'], "<br /> \n";
+
+                // store
+                $book = Books::firstOrNew(array('title' => $item['volumeInfo']['title']));;
+                $book->owner       = Auth::user()->id;
+                $book->cover = $item['volumeInfo']['imageLinks'] === NULL ?   '' : $item['volumeInfo']['imageLinks']['thumbnail'];
+                $book->requested = false;
+                $book->save();
+                break;
+            }
+			// redirect
+			Session::flash('message', 'Successfully created book!');
+			return back();
+		}
     }
 
     /**

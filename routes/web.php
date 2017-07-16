@@ -25,3 +25,5 @@ Route::post('change-settings', 'Auth\UpdatePasswordController@location');
 
 Route::get('/books', 'BooksController@index');
 Route::get('/books/create', 'BooksController@create');
+
+Route::post('/books', 'BooksController@store');

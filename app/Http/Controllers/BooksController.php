@@ -46,7 +46,7 @@ class BooksController extends Controller
     public function create()
     {
         // load the create form (app/views/nerds/create.blade.php)
-        return view('createbook');
+        return view('createbook')->with('books', Books::all());
     }
 
     /**

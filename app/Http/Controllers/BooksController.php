@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Books;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -45,8 +46,9 @@ class BooksController extends Controller
      */
     public function create()
     {
+        $books = Db::table('books')->where('owner', '=', Auth::user()->id)->get();
         // load the create form (app/views/nerds/create.blade.php)
-        return view('createbook')->with('books', Books::all());
+        return view('createbook')->with('books', $books);
     }
 
     /**
@@ -136,6 +138,9 @@ class BooksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book = Books::findOrFail($id);
+        $book->delete();
+        Session::flash('flash_message', 'Book successfully deleted!');
+        return back();
     }
 }

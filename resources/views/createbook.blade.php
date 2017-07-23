@@ -39,13 +39,16 @@
           @foreach($books as $key => $value)
 
   <div class="col-md-3">
-    <div class="thumbnail">
-      <a href="#">
+    <div class="thumbnail img-wrap">
+      {{ Form::open(['route' => ['books.destroy', $value->id],  'method' => 'DELETE']) }}
+          {{ Form::hidden('id', $value->id) }}
+          {{ Form::submit('&times;', ['class' => 'close btn btn-danger']) }}
+      {{ Form::close() }}
+
         <img src="{{ $value->cover }}" alt="" style="width:100%">
         <div class="caption">
           <p>{{ $value->title }}</p>
         </div>
-      </a>
     </div>
   </div>
 

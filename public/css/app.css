@@ -316,6 +316,32 @@ th {
   }
 }
 
+.img-wrap {
+    position: relative;
+    display: inline-block;
+    border: 1px red solid;
+}
+.img-wrap .close {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    z-index: 100;
+    background-color: #FFF;
+    padding: 2px 2px 2px;
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: .85;
+    text-align: center;
+    font-size: 22px;
+    line-height: 10px;
+    border-radius: 50%;
+}
+.img-wrap:hover .close {
+    opacity: 1;
+    color: red;
+}
+
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url(/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.eot?f4769f9bdb7466be65088239c12046d1);

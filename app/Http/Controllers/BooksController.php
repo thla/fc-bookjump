@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Books;
+use App\Request as BookRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -23,10 +24,32 @@ class BooksController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('index');
+        $this->middleware('auth');
     }
 
-     
+
+    private function addRequests(\Illuminate\View\View $view)
+    {
+        $myRequests = DB::table('requests')->where('requesterid', '=', Auth::user()->id)->get();
+        $otherRequests = DB::table('requests')->where('ownerid', '=', Auth::user()->id)->get();
+        $myOpenRequests = $myRequests->filter(function ($value, $key) {
+            return !$value->approved;
+        });
+        $myApprovedRequests = $myRequests->filter(function ($value, $key) {
+            return $value->approved;
+        });
+        $otherOpenRequests = $otherRequests->filter(function ($value, $key) {
+            return !$value->approved;
+        });
+        $otherApprovedRequests = $otherRequests->filter(function ($value, $key) {
+            return $value->approved;
+        });
+        return $view->with('myOpenRequests', $myOpenRequests)
+                    ->with('myApprovedRequests', $myApprovedRequests)
+                    ->with('otherOpenRequests', $otherOpenRequests)
+                    ->with('otherApprovedRequests', $otherApprovedRequests);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +59,7 @@ class BooksController extends Controller
     {
         $books = Books::all(); // got this from database model
 
-        return view('books')->with('books', $books); 
+        return $this->addRequests(view('books'))->with('books', $books);
     }
 
     /**
@@ -48,7 +71,7 @@ class BooksController extends Controller
     {
         $books = Db::table('books')->where('owner', '=', Auth::user()->id)->get();
         // load the create form (app/views/nerds/create.blade.php)
-        return view('createbook')->with('books', $books);
+        return $this->addRequests(view('createbook'))->with('books', $books);
     }
 
     /**

@@ -24,3 +24,4 @@ Route::post('change-password', 'Auth\UpdatePasswordController@update');
 Route::post('change-settings', 'Auth\UpdatePasswordController@location');
 
 Route::resource('books', 'BooksController');
+Route::resource('request', 'RequestController');

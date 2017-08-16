@@ -100,7 +100,8 @@ class BooksController extends Controller
             $client->setDeveloperKey("AIzaSyCp6TeBmn43CwAoM-_E8judP6-LuUoiAuo");
 
             $service = new Google_Service_Books($client);
-            $results = $service->volumes->listVolumes(Input::get('book'));
+            $optParams = array('country' => 'US');
+            $results = $service->volumes->listVolumes(Input::get('book'), $optParams);
 
             foreach ($results as $item) {
                 //echo $item['volumeInfo']['title'], "<br /> \n";

@@ -109,7 +109,11 @@ class RequestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $bookRequest = BookRequests::findOrFail( $id );
+        $bookRequest->approved = true;
+        
+        $bookRequest->save();       //
+        return back();
     }
 
     /**
@@ -120,6 +124,14 @@ class RequestController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $bookRequest = BookRequests::findOrFail( $id );
+        $book = Books::find($bookRequest->bookid);
+        $book->requested = false;
+        $book->approved = false;
+        
+        $book->save(); 
+        $bookRequest->delete();
+        
+        return back();
     }
 }

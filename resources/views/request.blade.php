@@ -36,8 +36,13 @@
           @if (count($myApprovedRequests) > 0)
           <ul class="list-group list-group-flush">
             @foreach ($myApprovedRequests as $item)
-            <li>{{$item->book}}</li>
-            @endforeach
+            <li class="form-inline">{{$item->book}}
+            {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteItem', 'action' => ['RequestController@destroy', $item->id]])
+            !!} {!! Form::button( '<i class="fa fa-times"></i>', ['type' => 'submit', 'class' =>
+            'delete text-danger close','id' => 'btnDeleteItem', 'data-id' => $item->id ] ) !!} {!! Form::close()
+            !!}
+        </li>
+        @endforeach
           </ul>
           @else
           <div class="card-body">
@@ -54,8 +59,17 @@
           @if (count($otherOpenRequests) > 0)
           <ul class="list-group list-group-flush">
             @foreach ($otherOpenRequests as $item)
-            <li>{{$item->book}}</li>
-            @endforeach
+            <li class="form-inline">{{$item->book}}
+            {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteItem', 'action' => ['RequestController@destroy', $item->id]])
+            !!} {!! Form::button( '<i class="fa fa-times"></i>', ['type' => 'submit', 'class' =>
+            'delete text-danger close','id' => 'btnDeleteItem', 'data-id' => $item->id ] ) !!} {!! Form::close()
+            !!}
+            {!! Form::open(['method' => 'PUT', 'id' => 'formApproveItem', 'action' => ['RequestController@update', $item->id]])
+            !!} {!! Form::button( '<i class="fa fa-check"></i>', ['type' => 'submit', 'class' =>
+            'text-success close','id' => 'btnApproveItem', 'data-id' => $item->id ] ) !!} {!! Form::close()
+            !!}
+        </li>
+        @endforeach
           </ul>
           @else
           <div class="card-body">
@@ -70,8 +84,13 @@
           @if (count($otherApprovedRequests) > 0)
           <ul class="list-group list-group-flush">
             @foreach ($otherApprovedRequests as $item)
-            <li>{{$item->book}}</li>
-            @endforeach
+            <li class="form-inline">{{$item->book}}
+            {!! Form::open(['method' => 'DELETE', 'id' => 'formDeleteItem', 'action' => ['RequestController@destroy', $item->id]])
+            !!} {!! Form::button( '<i class="fa fa-times"></i>', ['type' => 'submit', 'class' =>
+            'delete text-danger close','id' => 'btnDeleteItem', 'data-id' => $item->id ] ) !!} {!! Form::close()
+            !!}
+        </li>
+        @endforeach
           </ul>
           @else
           <div class="card-body">

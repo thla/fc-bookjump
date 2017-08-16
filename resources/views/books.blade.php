@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+@include ('request')
   <div class="row">
     <h2 class="my-4 text-center text-lg-left">All Books</h2>
   </div>
   <div class="row">
     <p>Click the <i class="fa fa-retweet"></i> to request a trade!</p>
   </div>
-  @include ('request')
   <div class="row">
     <div class="row text-center text-lg-left">
 

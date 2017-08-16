@@ -97,11 +97,11 @@ class BooksController extends Controller
 		} else {
             $client = new Google_Client();
             $client->setApplicationName("bookjump");
+            $client->setConfig("country","US");
             $client->setDeveloperKey("AIzaSyCp6TeBmn43CwAoM-_E8judP6-LuUoiAuo");
 
             $service = new Google_Service_Books($client);
-            $optParams = array('country' => 'US');
-            $results = $service->volumes->listVolumes(Input::get('book'), $optParams);
+            $results = $service->volumes->listVolumes(Input::get('book'));
 
             foreach ($results as $item) {
                 //echo $item['volumeInfo']['title'], "<br /> \n";
